@@ -1,4 +1,4 @@
-import { Redis } from '@upstash/redis';
+﻿import { Redis } from '@upstash/redis';
 
 const redis = Redis.fromEnv();
 
@@ -21,18 +21,13 @@ export default async function handler(req, res) {
     const key  = `code:${normalised}`;
     const data = await redis.get(key);
 
-    if (!data) {
-      return res.status(200).json({ status: 'invalid' });
-    }
+    if (!data) return res.status(200).json({ status: 'invalid' });
+    if (data.used) return res.status(200).json({ status: 'used', usedAt: data.used });
 
-    if (data.used) {
-      return res.status(200).json({ status: 'used', usedAt: data.used });
-    }
-
-    // Mark as used and increment usage counter
-    const usedAt = Date.now();
-    await redis.set(key, { ...data, used: usedAt });
-    await redis.incr('stats:usedCodes');
+    const pl = redis.pipeline();
+    pl.set(key, { ...data, used: Date.now() });
+    pl.incr('cw:used');
+    await pl.exec();
 
     return res.status(200).json({ status: 'valid' });
   } catch (err) {

@@ -1,20 +1,22 @@
-import { Redis } from '@upstash/redis';
+﻿import { Redis } from '@upstash/redis';
 
 const redis = Redis.fromEnv();
 
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
-      const [maxCodes, totalCodes, usedCodes] = await Promise.all([
-        redis.get('settings:maxCodes'),
-        redis.get('stats:totalCodes'),
-        redis.get('stats:usedCodes'),
+      const [maxCodes, totalCodes, usedCodes, lastReset] = await Promise.all([
+        redis.get('cw:maxCodes'),
+        redis.get('cw:total'),
+        redis.get('cw:used'),
+        redis.get('cw:lastReset'),
       ]);
 
       return res.status(200).json({
         maxCodes:   Number(maxCodes)   || 100,
         totalCodes: Number(totalCodes) || 0,
         usedCodes:  Number(usedCodes)  || 0,
+        lastReset:  lastReset || null,
       });
     } catch (err) {
       console.error('[/api/settings GET]', err);
@@ -31,7 +33,7 @@ export default async function handler(req, res) {
     }
 
     try {
-      await redis.set('settings:maxCodes', parsed);
+      await redis.set('cw:maxCodes', parsed);
       return res.status(200).json({ success: true, maxCodes: parsed });
     } catch (err) {
       console.error('[/api/settings POST]', err);
