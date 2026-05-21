@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.env
+.env.local
+.vercel
+
+# Runtime data — regenerated automatically
+data/codes.json

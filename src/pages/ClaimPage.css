@@ -1,0 +1,383 @@
+﻿/* ============================================================
+   CLAIM PAGE — Corner Walk Open Mic (2-step, polished)
+   ============================================================ */
+
+.cp-root {
+  min-height: 100vh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.cp-root.hindi {
+  font-family: var(--font-devanagari);
+}
+
+/* ── HERO ─────────────────────────────────────────────────── */
+.cp-hero {
+  position: relative;
+  background: linear-gradient(150deg, #8B0A1E 0%, #C8102E 50%, #E53050 100%);
+  padding: 48px 28px 72px;
+  overflow: hidden;
+}
+
+.cp-hero-grain {
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.cp-hero-circle { position: absolute; border-radius: 50%; background: rgba(255,255,255,0.06); pointer-events: none; }
+.cp-hero-circle--tl { width: 200px; height: 200px; top: -80px; left: -60px; }
+.cp-hero-circle--br { width: 260px; height: 260px; bottom: -100px; right: -80px; }
+
+.cp-hero-inner {
+  position: relative; z-index: 1;
+  display: flex; flex-direction: column; align-items: center; gap: 20px;
+}
+
+.cp-logo {
+  width: 100px; height: 100px;
+  border-radius: 18px; object-fit: cover;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.35), 0 0 0 3px rgba(255,255,255,0.15);
+}
+
+.cp-hero-text {
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+}
+
+.cp-badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.32);
+  color: rgba(255,255,255,0.97);
+  font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 5px 16px; border-radius: 99px;
+  backdrop-filter: blur(6px);
+}
+
+.cp-hero-title {
+  font-family: var(--font-serif);
+  font-size: 2.6rem; font-weight: 900;
+  color: #fff;
+  line-height: 1.1;
+  text-shadow: 0 2px 16px rgba(0,0,0,0.22);
+}
+
+.cp-hero-return {
+  font-size: 1.1rem; font-weight: 600;
+  color: rgba(255,255,255,0.92);
+  line-height: 1.4;
+}
+
+.cp-pills {
+  display: flex; gap: 8px; flex-wrap: wrap; justify-content: center;
+}
+
+.cp-pill {
+  display: flex; align-items: center; gap: 5px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.28);
+  color: #fff;
+  padding: 6px 14px; border-radius: 99px;
+  font-size: 0.88rem; font-weight: 600;
+  backdrop-filter: blur(4px);
+}
+
+.cp-wave { position: absolute; bottom: -1px; left: 0; right: 0; height: 56px; line-height: 0; }
+.cp-wave svg { width: 100%; height: 100%; display: block; }
+
+/* ── BODY ─────────────────────────────────────────────────── */
+.cp-body {
+  flex: 1;
+  padding: 0 20px 32px;
+  display: flex; flex-direction: column;
+  background: #fff;
+}
+
+/* ── STEPPER ──────────────────────────────────────────────── */
+.cp-stepper {
+  display: flex; align-items: center;
+  padding: 22px 8px 6px;
+}
+
+.cp-step-node {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+  flex-shrink: 0;
+}
+
+.cp-step-dot {
+  width: 40px; height: 40px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; font-weight: 800;
+  border: 2.5px solid #D1D5DB;
+  background: #fff; color: #9CA3AF;
+  transition: all 0.3s ease;
+}
+
+.cp-step-node span {
+  font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: #9CA3AF; transition: color 0.3s ease;
+}
+
+.cp-step-node.active .cp-step-dot {
+  border-color: var(--red); background: var(--red); color: #fff;
+  box-shadow: 0 4px 14px rgba(200,16,46,0.35);
+}
+.cp-step-node.active span { color: var(--red); }
+.cp-step-node.done .cp-step-dot  { border-color: var(--red); background: var(--red); color: #fff; }
+.cp-step-node.done span  { color: #6B7280; }
+
+.cp-step-track {
+  flex: 1; height: 3px;
+  background: #E5E7EB;
+  margin: 0 8px; margin-bottom: 24px;
+  border-radius: 2px;
+  transition: background 0.4s ease;
+}
+.cp-step-track.done { background: var(--red); }
+
+/* ── STEP 1 ───────────────────────────────────────────────── */
+.cp-step1 {
+  padding: 14px 0 8px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+
+.cp-snack-banner {
+  display: flex; align-items: center; justify-content: center; gap: 12px;
+  background: #FFF1F3;
+  border: 2px dashed #FECDD3;
+  border-radius: 16px;
+  padding: 16px 20px;
+}
+
+.cp-snack-emoji { font-size: 2.4rem; line-height: 1; }
+
+.cp-snack-label {
+  font-family: var(--font-serif);
+  font-size: 1.1rem; font-weight: 800;
+  color: #9E0D23;
+  line-height: 1.3; text-align: center; flex: 1;
+}
+
+.cp-insta-card {
+  background: #fff;
+  border: 2px solid #E5E7EB;
+  border-radius: 18px;
+  padding: 20px;
+  display: flex; flex-direction: column; gap: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.cp-insta-card-top { display: flex; align-items: flex-start; gap: 14px; }
+
+.cp-insta-icon-wrap {
+  width: 52px; height: 52px; border-radius: 14px;
+  background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; flex-shrink: 0;
+}
+
+.cp-insta-heading {
+  font-family: var(--font-serif);
+  font-size: 1.2rem; font-weight: 800;
+  color: #111827; line-height: 1.25; margin-bottom: 3px;
+}
+
+.cp-insta-sub { font-size: 0.9rem; color: var(--red); font-weight: 700; }
+.cp-insta-desc { font-size: 0.92rem; color: #6B7280; line-height: 1.55; }
+
+.cp-insta-open-btn {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
+  background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366);
+  color: #fff;
+  border-radius: 12px;
+  padding: 14px 18px;
+  text-decoration: none;
+  font-weight: 700; font-size: 1rem;
+  transition: opacity 0.15s, transform 0.15s;
+  line-height: 1.3;
+}
+.cp-insta-open-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+
+.cp-insta-handle {
+  margin-left: auto;
+  font-size: 0.88rem; font-weight: 600;
+  opacity: 0.92; white-space: nowrap;
+}
+
+/* ── CTA BUTTON ───────────────────────────────────────────── */
+.cp-cta { padding: 4px 0 8px; }
+
+.cp-claim-btn {
+  width: 100%;
+  padding: 20px 24px;
+  background: linear-gradient(135deg, #C8102E 0%, #E53050 100%);
+  color: #fff !important;
+  border: none;
+  border-radius: 16px;
+  font-family: var(--font-serif);
+  font-size: 1.15rem; font-weight: 900;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  gap: 10px; flex-wrap: wrap;
+  box-shadow: 0 8px 28px rgba(200,16,46,0.38);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  position: relative; overflow: hidden;
+  text-align: center; line-height: 1.35;
+}
+
+.cp-claim-btn::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.cp-claim-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(200,16,46,0.42); }
+.cp-claim-btn:active:not(:disabled) { transform: translateY(0); }
+.cp-claim-btn:disabled { opacity: 0.8; cursor: not-allowed; }
+.cp-claim-btn--error {
+  background: linear-gradient(135deg, #374151, #111827) !important;
+  font-family: var(--font-sans); font-size: 0.95rem;
+  font-weight: 600; box-shadow: var(--shadow-md);
+}
+
+.cp-spinner {
+  width: 22px; height: 22px;
+  border: 3px solid rgba(255,255,255,0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.75s linear infinite;
+  flex-shrink: 0;
+}
+
+.cp-limit-box {
+  text-align: center; padding: 32px 20px;
+  background: #FFF1F3; border: 2px dashed #FECDD3; border-radius: 16px;
+}
+.cp-limit-emoji { font-size: 2.4rem; display: block; margin-bottom: 10px; }
+.cp-limit-title { font-weight: 800; color: #9E0D23; font-size: 1.1rem; margin-bottom: 6px; }
+.cp-limit-hint  { font-size: 0.92rem; color: #6B7280; }
+
+/* ── STEP 2 ───────────────────────────────────────────────── */
+.cp-step2 {
+  padding: 14px 0 8px;
+  display: flex; flex-direction: column; gap: 16px;
+}
+
+.cp-code-card {
+  position: relative;
+  background: linear-gradient(140deg, #7A0918 0%, #C8102E 55%, #E53050 100%);
+  border-radius: 20px;
+  padding: 36px 24px 30px;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(200,16,46,0.4);
+  overflow: hidden;
+}
+
+.cp-code-card::before {
+  content: ''; position: absolute;
+  top: -60px; right: -40px; width: 180px; height: 180px;
+  background: rgba(255,255,255,0.07); border-radius: 50%;
+}
+.cp-code-card::after {
+  content: ''; position: absolute;
+  bottom: -50px; left: -30px; width: 150px; height: 150px;
+  background: rgba(255,255,255,0.05); border-radius: 50%;
+}
+
+.cp-code-label {
+  position: relative; z-index: 1;
+  font-size: 0.78rem; font-weight: 800;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: rgba(255,255,255,0.78);
+  margin-bottom: 16px;
+}
+
+.cp-code-digits {
+  position: relative; z-index: 1;
+  font-family: 'Courier New', 'Courier', monospace;
+  font-size: 4rem; font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.4em; padding-right: 0.4em;
+  text-shadow: 0 4px 16px rgba(0,0,0,0.28);
+  line-height: 1;
+}
+
+.cp-code-hint {
+  position: relative; z-index: 1;
+  font-size: 0.9rem; color: rgba(255,255,255,0.85);
+  margin: 18px 0 24px; line-height: 1.5;
+}
+
+.cp-copy-btn {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%;
+  background: rgba(255,255,255,0.16);
+  border: 2px solid rgba(255,255,255,0.38);
+  color: #fff !important;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-size: 1rem; font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  backdrop-filter: blur(6px);
+  font-family: inherit;
+  box-sizing: border-box;
+}
+.cp-copy-btn:hover  { background: rgba(255,255,255,0.26); }
+.cp-copy-btn.copied { background: rgba(255,255,255,0.24); border-color: rgba(255,255,255,0.56); }
+
+.cp-reminder-card {
+  background: #F9FAFB;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 14px;
+  padding: 16px 18px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; flex-wrap: wrap;
+}
+
+.cp-reminder-label { font-size: 0.92rem; color: #6B7280; font-weight: 500; }
+
+.cp-reminder-insta {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.95rem; font-weight: 700;
+  color: var(--red);
+  text-decoration: none; white-space: nowrap;
+}
+.cp-reminder-insta:hover { opacity: 0.75; }
+
+/* ── LANGUAGE TOGGLE ──────────────────────────────────────── */
+.cp-lang {
+  display: flex; justify-content: center;
+  padding: 22px 0 8px;
+  border-top: 1px solid #F3F4F6;
+  margin-top: auto;
+}
+
+.cp-lang-btn {
+  background: none !important;
+  border: 2px solid #D1D5DB !important;
+  color: #6B7280 !important;
+  padding: 10px 28px;
+  border-radius: 99px;
+  font-size: 0.92rem; font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  font-family: inherit;
+  box-shadow: none !important;
+}
+.cp-lang-btn:hover { border-color: var(--red) !important; color: var(--red) !important; }
+
+.cp-footer {
+  text-align: center; font-size: 0.78rem;
+  color: #9CA3AF; padding: 12px 0 4px;
+  letter-spacing: 0.05em;
+}
