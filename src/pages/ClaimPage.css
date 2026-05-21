@@ -212,7 +212,10 @@
 }
 
 /* ── CTA BUTTON ───────────────────────────────────────────── */
-.cp-cta { padding: 4px 0 8px; }
+.cp-cta {
+  padding: 4px 0 8px;
+  animation: fadeUp 0.35s ease both;
+}
 
 .cp-claim-btn {
   width: 100%;

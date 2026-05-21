@@ -97,6 +97,7 @@ export default function ClaimPage() {
   const [step, setStep]               = useState(() => localStorage.getItem('cw_code') ? 2 : 1);
   const [uiState, setUiState]         = useState('idle'); // idle | loading | error | limit
   const [copied, setCopied]           = useState(false);
+  const [instaOpened, setInstaOpened] = useState(false);
 
   const t          = T[lang];
   const isHindi    = lang === 'hi';
@@ -199,14 +200,20 @@ export default function ClaimPage() {
                 </div>
               </div>
               <p className="cp-insta-desc">{t.s1Desc}</p>
-              <a href={INSTA_URL} target="_blank" rel="noopener noreferrer" className="cp-insta-open-btn">
+              <a
+                href={INSTA_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cp-insta-open-btn"
+                onClick={() => setInstaOpened(true)}
+              >
                 <IconInstagram />
                 <span>{t.s1BtnOpen}</span>
                 <span className="cp-insta-handle">@cornerwalk.noida ↗</span>
               </a>
             </div>
 
-            <div className="cp-cta">
+            {instaOpened && <div className="cp-cta">
               {uiState === 'limit' ? (
                 <div className="cp-limit-box">
                   <span className="cp-limit-emoji">😔</span>
@@ -228,7 +235,7 @@ export default function ClaimPage() {
                   )}
                 </button>
               )}
-            </div>
+            </div>}
           </div>
         )}
 
