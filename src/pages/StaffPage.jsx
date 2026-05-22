@@ -124,7 +124,7 @@ export default function StaffPage() {
             <span className="sp-header-eyebrow">Corner Walk</span>
             <h1 className="sp-header-title">Staff Portal</h1>
           </div>
-          <button className="sp-refresh-btn" onClick={loadStats} title="Refresh stats">
+          <button className="sp-refresh-btn" onClick={loadStats} title="Refresh करो">
             <IconRefresh />
           </button>
         </div>
@@ -135,7 +135,7 @@ export default function StaffPage() {
 
         {/* Validator card */}
         <div className="sp-card sp-validator-card">
-          <p className="sp-card-label">Validate Code</p>
+          <p className="sp-card-label">कोड चेक करो</p>
 
           <div className="sp-input-wrap">
             <input
@@ -151,7 +151,7 @@ export default function StaffPage() {
               autoCorrect="off"
               spellCheck={false}
               inputMode="text"
-              aria-label="Enter code"
+              aria-label="कोड डालो"
             />
             <div className="sp-char-count">{code.length}/4</div>
           </div>
@@ -163,12 +163,12 @@ export default function StaffPage() {
               disabled={checking || code.length !== 4}
             >
               {checking
-                ? <><span className="sp-spinner" />Checking…</>
-                : 'Validate'}
+                ? <><span className="sp-spinner" />देखते हैं…</>
+                : 'चेक करो'}
             </button>
             {(result || code) && (
               <button className="sp-reset-btn" onClick={reset}>
-                Clear
+                हटाओ
               </button>
             )}
           </div>
@@ -185,26 +185,26 @@ export default function StaffPage() {
               <div className="sp-result-body">
                 {result.status === 'valid' && (
                   <>
-                    <strong>Valid — Code Accepted ✓</strong>
-                    <span>Snacks redeemed. Mark the code as used.</span>
+                    <strong>सही है — कोड OK है ✓</strong>
+                    <span>स्नैक्स मिल गए! कोड use हो गया।</span>
                   </>
                 )}
                 {result.status === 'used' && (
                   <>
-                    <strong>Already Claimed</strong>
-                    <span>{result.usedAt ? `Used at ${formatTime(result.usedAt)}` : 'This code was already redeemed'}</span>
+                    <strong>पहले ही ले चुके हैं</strong>
+                    <span>{result.usedAt ? `${formatTime(result.usedAt)} बजे use हुआ था` : 'ये कोड पहले ही redeem हो चुका है'}</span>
                   </>
                 )}
                 {result.status === 'invalid' && (
                   <>
-                    <strong>Invalid Code</strong>
-                    <span>This code does not exist in the system</span>
+                    <strong>गलत कोड है</strong>
+                    <span>ये कोड हमारे system में नहीं है</span>
                   </>
                 )}
                 {result.status === 'error' && (
                   <>
-                    <strong>Server Error</strong>
-                    <span>Please try again in a moment</span>
+                    <strong>कुछ गड़बड़ हो गई</strong>
+                    <span>थोड़ा रुको और फिर try करो</span>
                   </>
                 )}
               </div>
@@ -214,22 +214,22 @@ export default function StaffPage() {
 
         {/* Stats card */}
         <div className="sp-card sp-stats-card">
-          <p className="sp-card-label">Live Stats</p>
+          <p className="sp-card-label">Live हाल</p>
 
           <div className="sp-stats-row">
             <div className="sp-stat">
               <span className="sp-stat-val sp-stat-val--red">{used}</span>
-              <span className="sp-stat-lbl">Redeemed</span>
+              <span className="sp-stat-lbl">Use हुए</span>
             </div>
             <div className="sp-stat-divider" />
             <div className="sp-stat">
               <span className="sp-stat-val">{issued}</span>
-              <span className="sp-stat-lbl">Codes Issued</span>
+              <span className="sp-stat-lbl">बने कोड</span>
             </div>
             <div className="sp-stat-divider" />
             <div className="sp-stat">
               <span className="sp-stat-val sp-stat-val--green">{remaining}</span>
-              <span className="sp-stat-lbl">Remaining</span>
+              <span className="sp-stat-lbl">बचे हैं</span>
             </div>
           </div>
 
@@ -238,7 +238,7 @@ export default function StaffPage() {
               <div className="sp-progress-fill" style={{ width: `${pct}%` }} />
             </div>
             <div className="sp-progress-labels">
-              <span>{issued} of {maxC} issued</span>
+              <span>{maxC} में से {issued} बने</span>
               <span>{pct}%</span>
             </div>
           </div>
@@ -250,7 +250,7 @@ export default function StaffPage() {
 
           <div className="sp-setting-group">
             <label className="sp-setting-label" htmlFor="max-codes">
-              Maximum Codes
+              ज़्यादा से ज़्यादा कोड
             </label>
             <div className="sp-setting-row">
               <input
@@ -268,11 +268,11 @@ export default function StaffPage() {
                 onClick={saveMax}
                 disabled={savingMax || savedMax}
               >
-                {savedMax ? '✓ Saved' : savingMax ? '…' : 'Save'}
+                {savedMax ? '✓ हो गया' : savingMax ? '…' : 'Save करो'}
               </button>
             </div>
             <p className="sp-setting-hint">
-              Once this limit is reached, no new codes can be claimed.
+              जितने कोड set करो, उतने ही बनेंगे — उसके बाद नए नहीं मिलेंगे।
             </p>
           </div>
         </div>
